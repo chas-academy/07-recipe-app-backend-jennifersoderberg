@@ -49,6 +49,11 @@ class SavedRecipeController extends Controller
 
     public function destroy($recipeId, Request $request)
     {
-        //
+        SavedRecipe::where('user_id', $request->user()->id)
+        ->where('recipe_id', $recipeId)
+        ->delete();
+        return response()->json(
+            ['message' => 'Recipe deleted!!']
+        );
     }
 }
